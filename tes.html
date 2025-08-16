@@ -1,11 +1,319 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-  <meta charset="UTF-8">
-  <title>Test Gambar</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>AureTech — Brand Teknologi Mewah</title>
+
+  <!-- Google Font -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+
+  <style>
+    :root{
+      --bg:#05050a;
+      --glass: rgba(255,255,255,0.06);
+      --accent:#7b61ff;
+      --accent-2:#00d4ff;
+      --muted: rgba(255,255,255,0.7);
+      --card: rgba(255,255,255,0.03);
+      --radius:16px;
+      --maxw:1200px;
+      color-scheme: dark;
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      font-family:'Inter',system-ui,-apple-system,Segoe UI,Roboto,"Helvetica Neue",Arial;
+      background:linear-gradient(180deg,#03030a 0%, #071025 100%);
+      color:#fff;
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
+      line-height:1.5;
+    }
+
+    /* Container */
+    .wrap{max-width:var(--maxw);margin:0 auto;padding:40px 24px;}
+
+    /* NAV */
+    header{
+      position:fixed;left:0;right:0;top:18px;z-index:60;
+      display:flex;justify-content:center;pointer-events:none;
+    }
+    .nav{
+      width:calc(100% - 48px);max-width:var(--maxw);
+      background:linear-gradient(90deg, rgba(255,255,255,0.03), rgba(255,255,255,0.02));
+      border-radius:14px;padding:10px 18px;display:flex;align-items:center;justify-content:space-between;gap:12px;
+      box-shadow:0 6px 30px rgba(2,6,23,0.6);
+      pointer-events:auto;
+      backdrop-filter: blur(6px) saturate(120%);
+    }
+    .brand{display:flex;align-items:center;gap:12px}
+    .logo{
+      height:44px;width:44px;border-radius:10px;
+      background:linear-gradient(135deg,var(--accent),var(--accent-2));
+      display:flex;align-items:center;justify-content:center;font-weight:800;font-size:18px;
+      box-shadow:0 6px 20px rgba(123,97,255,0.18), inset 0 -3px 12px rgba(255,255,255,0.06);
+    }
+    .brand h1{font-size:16px;margin:0}
+    nav a{color:var(--muted);text-decoration:none;padding:8px 12px;border-radius:10px;font-weight:600;font-size:14px}
+    nav a:hover{background:rgba(255,255,255,0.03);color:#fff}
+
+    /* HERO with background video */
+    .hero{
+      margin-top:90px;
+      position:relative;border-radius:20px;overflow:hidden;min-height:520px;
+      box-shadow: 0 30px 80px rgba(2,6,23,0.7);
+    }
+    .hero video, .hero .hero-bg{
+      position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:0;
+      filter:contrast(1.04) saturate(1.1) brightness(0.45);
+    }
+    .hero .overlay{
+      position:absolute;inset:0;background:linear-gradient(180deg, rgba(8,10,20,0.0) 0%, rgba(2,6,23,0.6) 70%);z-index:1;
+    }
+    .hero-content{
+      position:relative;z-index:2;padding:70px 40px;display:flex;gap:40px;align-items:flex-start;
+    }
+    .hero-text{max-width:640px}
+    .eyebrow{display:inline-block;padding:6px 10px;background:rgba(255,255,255,0.04);border-radius:999px;font-weight:700;margin-bottom:18px;color:var(--accent);}
+    h2{font-size:44px;margin:0 0 16px;letter-spacing:-0.5px}
+    p.lead{color:var(--muted);font-size:18px;margin:0 0 26px}
+
+    .cta{
+      display:flex;gap:12px;flex-wrap:wrap;
+    }
+    .btn{
+      padding:12px 18px;border-radius:12px;font-weight:700;border:0;cursor:pointer;
+      background:linear-gradient(90deg,var(--accent),var(--accent-2));color:#05050a;
+      box-shadow:0 12px 30px rgba(123,97,255,0.14);
+    }
+    .btn.ghost{background:transparent;color:#fff;border:1px solid rgba(255,255,255,0.08)}
+
+    /* Feature cards */
+    .features{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-top:-40px;padding:24px}
+    .card{background:var(--card);padding:20px;border-radius:14px;backdrop-filter: blur(6px);box-shadow: 0 8px 30px rgba(2,6,23,0.4)}
+    .card h3{margin:8px 0 6px}
+    .muted{color:var(--muted);font-size:14px}
+
+    /* About / Pengertian teknologi */
+    .about{display:flex;gap:30px;align-items:center;padding:40px 0}
+    .about .text{flex:1}
+    .about .media{flex:1;min-height:220px;border-radius:14px;background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));display:flex;align-items:center;justify-content:center;overflow:hidden}
+    .about .media img{max-width:100%;height:auto;display:block}
+
+    /* Grid two columns lower */
+    .grid-2{display:grid;grid-template-columns:1fr 380px;gap:24px}
+
+    /* Testimonials / footer */
+    .testimonials{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:24px}
+    .testimonial{padding:18px;border-radius:12px;background:linear-gradient(180deg, rgba(255,255,255,0.02), transparent);}
+
+    footer{margin-top:40px;padding:28px;border-radius:14px;background:linear-gradient(180deg,#040417,#061027);display:flex;justify-content:space-between;align-items:center;gap:20px}
+
+    /* Responsive */
+    @media (max-width:900px){
+      h2{font-size:32px}
+      .features{grid-template-columns:repeat(1,1fr)}
+      .grid-2{grid-template-columns:1fr}
+      .hero-content{flex-direction:column;padding:36px 20px}
+      .about{flex-direction:column}
+      .testimonials{grid-template-columns:1fr}
+    }
+  </style>
 </head>
 <body>
-  <h1>Cek Gambar</h1>
-  <img src="fazri.jpg" alt="gambar 1" width="200">
+
+  <header>
+    <div class="nav" role="navigation" aria-label="Main navigation">
+      <div class="brand">
+        <div class="logo" aria-hidden="true">AT</div>
+        <div>
+          <h1 style="margin:0">AureTech</h1>
+          <div style="font-size:12px;color:var(--muted)">Luxury Technology Brand</div>
+        </div>
+      </div>
+
+      <nav>
+        <a href="#about">Tentang</a>
+        <a href="#features">Fitur</a>
+        <a href="#works">Cara Kerja</a>
+        <a href="#contact">Kontak</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="wrap">
+    <!-- HERO -->
+    <section class="hero" aria-label="Hero section">
+      <!-- Background video: ganti hero.mp4 atau hapus video tag kalau gak punya -->
+      <video autoplay muted loop playsinline id="bg-video">
+        <source src="teknologi.mp4" type="video/mp4">
+        <!-- fallback: kalau video gak ada, pakai div dengan background-image -->
+      </video>
+      <div class="hero-bg" style="background-image: linear-gradient(135deg, rgba(123,97,255,0.12), rgba(0,212,255,0.06));"></div>
+      <div class="overlay"></div>
+
+      <div class="hero-content wrap" style="padding-top:80px;padding-bottom:80px">
+        <div class="hero-text">
+          <span class="eyebrow">INOVASI • ELEGAN • FUTURISTIK</span>
+          <h2>Membangun Solusi Teknologi yang Mewah dan Bermakna</h2>
+          <p class="lead">AureTech menyatukan desain premium dan rekayasa perangkat lunak modern untuk produk teknologi yang bukan hanya canggih — tetapi juga indah dalam pengalaman pengguna.</p>
+
+          <div class="cta">
+            <button class="btn" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})">Hubungi Kami</button>
+            <button class="btn ghost" onclick="document.getElementById('features').scrollIntoView({behavior:'smooth'})">Lihat Fitur</button>
+          </div>
+        </div>
+
+        <!-- small feature highlights -->
+        <div style="flex:0 0 360px;display:flex;flex-direction:column;gap:12px">
+          <div class="card">
+            <h3>Desain Premium</h3>
+            <div class="muted">Material digital berkelas, animasi halus, dan estetika minimalis.</div>
+          </div>
+          <div class="card">
+            <h3>Keamanan Tingkat Tinggi</h3>
+            <div class="muted">Arsitektur yang dirancang untuk privasi dan proteksi data.</div>
+          </div>
+          <div class="card">
+            <h3>Skala & Performant</h3>
+            <div class="muted">Infrastruktur yang bisa tumbuh tanpa mengorbankan pengalaman.</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Features -->
+    <section id="features" class="features" aria-label="Fitur utama">
+      <div class="card">
+        <h3>Edge AI</h3>
+        <div class="muted">Integrasi model ML yang berjalan cepat di perangkat untuk pengalaman real-time.</div>
+      </div>
+      <div class="card">
+        <h3>Cloud Native</h3>
+        <div class="muted">Microservices, autoscaling, dan deployment modern untuk reliabilitas.</div>
+      </div>
+      <div class="card">
+        <h3>UX Premium</h3>
+        <div class="muted">Antarmuka yang ramah pengguna dan estetika mewah.</div>
+      </div>
+    </section>
+
+    <!-- About & Pengertian Teknologi -->
+    <section id="about" class="about" aria-label="Tentang AureTech">
+      <div class="text">
+        <h2 style="margin-top:0">Tentang AureTech</h2>
+        <p class="muted">AureTech adalah brand teknologi yang menggabungkan performa teknis dan pengalaman pengguna mewah. Kami membangun produk yang aman, skalabel, dan dipoles dengan estetika premium.</p>
+
+        <h3>Pengertian Teknologi</h3>
+        <p class="muted">Secara umum, <strong>teknologi</strong> adalah penerapan pengetahuan ilmiah, alat, teknik, dan proses untuk memecahkan masalah atau memenuhi kebutuhan manusia. Dalam konteks modern, teknologi mencakup perangkat keras (hardware), perangkat lunak (software), jaringan, dan sistem yang memungkinkan otomatisasi, komunikasi, analisis data, dan inovasi produk atau layanan.</p>
+
+        <p class="muted">Di AureTech, kami melihat teknologi bukan hanya sebagai alat — tetapi sebagai medium untuk menciptakan pengalaman yang elegan, aman, dan bernilai bagi pengguna akhir.</p>
+      </div>
+
+      <div class="media">
+        <!-- Ganti gambar ini sesuai kebutuhan -->
+        <img src="mewah.jpg" alt="Ilustrasi teknologi mewah">
+      </div>
+    </section>
+
+    <!-- How it works / Grid 2 -->
+    <section id="works" style="padding:12px 0">
+      <div class="grid-2">
+        <div>
+          <h3>Cara Kerja Solusi Kami</h3>
+          <ol style="color:var(--muted)">
+            <li><strong>Pemetaan Kebutuhan:</strong> Konsultasi untuk memahami masalah bisnis dan pengguna.</li>
+            <li><strong>Arsitektur & Desain:</strong> Merancang solusi yang aman, scalable, dan estetis.</li>
+            <li><strong>Implementasi:</strong> Development, QA, dan deployment menggunakan praktik terbaik.</li>
+            <li><strong>Monitoring & Iterasi:</strong> Pengukuran performa dan perbaikan berkelanjutan.</li>
+          </ol>
+        </div>
+
+        <aside style="background:var(--card);padding:18px;border-radius:14px;">
+          <h4 style="margin:0 0 8px">Spesialisasi Kami</h4>
+          <ul style="color:var(--muted);margin:8px 0 0;padding-left:18px">
+            <li>Mobile & Web App</li>
+            <li>Cloud & DevOps</li>
+            <li>AI / ML Integration</li>
+            <li>Security by Design</li>
+          </ul>
+        </aside>
+      </div>
+    </section>
+
+    <!-- Testimonials -->
+    <section style="padding-top:20px">
+      <h3 style="margin-bottom:12px">Testimoni</h3>
+      <div class="testimonials">
+        <div class="testimonial">
+          <strong>PT. Nova</strong>
+          <p class="muted">"Kolaborasi dengan AureTech mengubah produk kami jadi lebih cepat, aman, dan elegan."</p>
+        </div>
+        <div class="testimonial">
+          <strong>StartUp X</strong>
+          <p class="muted">"Desain dan pengalaman pengguna mereka berkelas — user retention naik 34%."</p>
+        </div>
+        <div class="testimonial">
+          <strong>Klien Enterprise</strong>
+          <p class="muted">"Implementasi cloud-nya stabil dan hemat biaya." </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Contact -->
+    <section id="contact" style="margin-top:30px">
+      <div style="display:flex;gap:20px;flex-wrap:wrap;align-items:flex-start">
+        <div style="flex:1;min-width:280px">
+          <h3>Kontak</h3>
+          <p class="muted">Butuh demo atau ingin konsultasi? Kirim pesan ke email kami atau hubungi via WhatsApp.</p>
+
+          <p style="margin-top:6px">
+            <strong>Email:</strong> <span class="muted">fazrisetiansyah444@gmail.com</span><br>
+            <strong>WhatsApp:</strong> <span class="muted">+62 812-1374-3253</span>
+          </p>
+        </div>
+
+        <form style="flex:0 0 420px;background:var(--card);padding:18px;border-radius:12px;">
+          <label style="display:block;margin-bottom:8px;color:var(--muted)">Nama</label>
+          <input type="text" placeholder="Nama kamu" style="width:100%;padding:10px;border-radius:10px;border:1px solid rgba(255,255,255,0.04);background:transparent;color:#fff;margin-bottom:10px">
+
+          <label style="display:block;margin-bottom:8px;color:var(--muted)">Pesan</label>
+          <textarea placeholder="Tulis pesan..." style="width:100%;padding:10px;border-radius:10px;border:1px solid rgba(255,255,255,0.04);background:transparent;color:#fff;min-height:90px"></textarea>
+
+          <div style="margin-top:10px;display:flex;gap:10px;justify-content:flex-end">
+            <button type="button" class="btn">Kirim</button>
+            <button type="reset" class="btn ghost">Reset</button>
+          </div>
+        </form>
+      </div>
+    </section>
+
+    <footer>
+      <div>
+        <strong>AureTech</strong>
+        <div style="color:var(--muted);font-size:13px">© <span id="yr"></span> semua hak cipta.</div>
+      </div>
+      <div style="color:var(--muted);font-size:14px">Follow kami di <span style="color:var(--accent)">Instagram</span> • <span style="color:var(--accent-2)">LinkedIn</span></div>
+    </footer>
+  </main>
+
+  <script>
+    // set year
+    document.getElementById('yr').textContent = new Date().getFullYear();
+
+    // If video file missing, hide video element to reveal image fallback
+    (function(){
+      var v = document.getElementById('bg-video');
+      v.addEventListener('error', function(){
+        v.style.display = 'none';
+        // optionally change .hero-bg to use a background image
+        document.querySelector('.hero .hero-bg').style.display = 'block';
+        document.querySelector('.hero .hero-bg').style.backgroundImage = "url('hero.jpg')";
+        document.querySelector('.hero .hero-bg').style.filter = 'brightness(0.45)';
+      });
+    })();
+  </script>
 </body>
 </html>
